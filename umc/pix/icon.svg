@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="gr" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f85050"/><stop offset="100%" stop-color="#a00c0c"/>
+    </linearGradient>
+    <linearGradient id="gb" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#589eff"/><stop offset="100%" stop-color="#1a52c0"/>
+    </linearGradient>
+    <linearGradient id="gg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4ee162"/><stop offset="100%" stop-color="#0f8424"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="36" fill="#111827"/>
+
+  <!-- Piece U (red): block + right tab + bottom vtab -->
+  <rect x="68" y="8"   width="120" height="64" rx="11" fill="url(#gr)"/>
+  <circle cx="188" cy="40" r="14" fill="url(#gr)"/>
+  <circle cx="128" cy="77" r="14" fill="url(#gr)"/>
+  <rect x="72" y="11" width="112" height="13" rx="10" fill="#ff9696" opacity="0.50"/>
+
+  <!-- Piece M (blue): block + left tab + bottom vtab - top slot -->
+  <rect x="68"  y="77" width="120" height="64" rx="11" fill="url(#gb)"/>
+  <circle cx="68"  cy="109" r="14" fill="url(#gb)"/>
+  <circle cx="128" cy="146" r="14" fill="url(#gb)"/>
+  <circle cx="128" cy="75"  r="12" fill="#111827"/>
+  <rect x="72" y="80" width="112" height="13" rx="10" fill="#9eceff" opacity="0.50"/>
+
+  <!-- Piece C (green): block + right tab - top slot -->
+  <rect x="68"  y="146" width="120" height="64" rx="11" fill="url(#gg)"/>
+  <circle cx="188" cy="178" r="14" fill="url(#gg)"/>
+  <circle cx="128" cy="144" r="12" fill="#111827"/>
+  <rect x="72" y="149" width="112" height="13" rx="10" fill="#8fffa2" opacity="0.50"/>
+
+  <!-- Letters -->
+  <text font-family="'Arial Black',Arial,sans-serif" font-size="46" font-weight="900"
+        text-anchor="middle" dominant-baseline="central" fill="white"
+        filter="drop-shadow(1px 2px 2px rgba(0,0,0,0.5))">
+    <tspan x="128" y="40">U</tspan>
+    <tspan x="128" y="109">M</tspan>
+    <tspan x="128" y="178">C</tspan>
+  </text>
+</svg>

@@ -1,0 +1,78 @@
+/* UMC student view: step-by-step consoles + help boxes */
+
+/* ── Stepper ── */
+.umc-stepper {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin: 10px 0 18px 0; padding: 0; list-style: none;
+}
+.umc-stepper li {
+    padding: 6px 14px;
+    border: 2px solid #d7d7d7;
+    border-radius: 999px;
+    background: #fff;
+    font-weight: 700;
+    transition: border-color .2s, background .2s, color .2s;
+    cursor: pointer;
+}
+/* USE = red */
+.umc-stepper li[data-umc-step="use"].is-active    { border-color: #d32f2f; background: #d32f2f; color: #fff; }
+/* MODIFY = blue */
+.umc-stepper li[data-umc-step="modify"].is-active { border-color: #1565c0; background: #1565c0; color: #fff; }
+/* CREATE = green */
+.umc-stepper li[data-umc-step="create"].is-active { border-color: #2e7d32; background: #2e7d32; color: #fff; }
+
+/* ── Navigation buttons ── */
+.umc-navigation {
+    margin: 16px 0; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+}
+.umc-navigation button {
+    padding: 10px 16px; border-radius: 6px; border: none;
+    cursor: pointer; font-weight: 600; color: #fff;
+}
+.umc-navigation button.secondary { background: #9e9e9e; }
+#console-use    .umc-navigation button:not(.secondary) { background: #1565c0; }
+#console-modify .umc-navigation button[data-umc-next]  { background: #2e7d32; }
+#console-modify .umc-navigation button[data-umc-prev]  { background: #9e9e9e; }
+#console-create .umc-navigation button[data-umc-prev]  { background: #9e9e9e; }
+
+/* ── Help boxes ── */
+.umc-help-box {
+    border-radius: 8px; padding: 12px 14px; margin: 10px 0 14px 0;
+}
+.umc-help-box h4  { margin: 0 0 8px 0; font-size: 1.05rem; }
+.umc-help-box ol  { margin: 0; padding-left: 18px; }
+.umc-help-box li  { margin: 6px 0; }
+.umc-help-box code { background: rgba(0,0,0,.06); padding: 2px 5px; border-radius: 4px; }
+
+#console-use    .umc-help-box { background:#fff5f5; border:1px solid #ffcdd2; border-left:5px solid #d32f2f; }
+#console-modify .umc-help-box { background:#eef6ff; border:1px solid #cfe6ff; border-left:5px solid #1565c0; }
+#console-create .umc-help-box { background:#f1f8f2; border:1px solid #c8e6c9; border-left:5px solid #2e7d32; }
+
+/* ── Misc ── */
+.snap-description { margin: 10px 0 12px 0; }
+
+/* UMC icon */
+.activityiconcontainer.umc,
+.activityiconcontainer.modicon_umc {
+    padding:0!important; background:#111827!important;
+    border-radius:8px!important; overflow:hidden!important;
+}
+.activityiconcontainer.umc img,
+.activityiconcontainer.modicon_umc img,
+img.activityicon[src*="umc"] {
+    width:100%!important; height:100%!important;
+    min-width:100%!important; min-height:100%!important;
+    padding:0!important; margin:0!important; object-fit:cover!important;
+}
+
+/* Sezioni nascoste: usa visibility+position invece di display:none
+   per evitare che il browser distrugga gli iframe quando cambiano tab.
+   Il JS imposta questi stili dinamicamente; la regola iniziale
+   nasconde MODIFY e CREATE finché il JS non ha inizializzato. */
+#console-modify,
+#console-create {
+    visibility: hidden;
+    position: absolute;
+    height: 0;
+    overflow: hidden;
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/umc/db" VERSION="2025061336" COMMENT="XMLDB file for Moodle mod/umc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd">
+
+  <TABLES>
+
+    <TABLE NAME="umc" COMMENT="UMC main table">
+      <FIELDS>
+
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT=""/>
+
+        <FIELD NAME="intro" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0"/>
+
+        <!-- URLs: use TEXT to avoid truncation for long Snap URLs -->
+        <FIELD NAME="urluse" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="urlmodify" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="urlcreate" TYPE="text" NOTNULL="false"/>
+
+        <!-- Descriptions (HTML from editors in mod_form) -->
+        <FIELD NAME="urluse_desc" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="urlmodify_desc" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="urlcreate_desc" TYPE="text" NOTNULL="false"/>
+
+        <!-- Optional display config (keep if your code uses it or future-proofing) -->
+        <FIELD NAME="display" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="displayoptions" TYPE="text" NOTNULL="false"/>
+
+        <FIELD NAME="revision" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+        <!-- Timestamps -->
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+      </FIELDS>
+
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="course" TYPE="foreign" FIELDS="course" REFTABLE="course" REFFIELDS="id"/>
+      </KEYS>
+
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+      </INDEXES>
+    </TABLE>
+
+    <!-- Per-student "Create" project pointer (Snap cloud) -->
+    <TABLE NAME="umc_userproject" COMMENT="Per-user Snap project for Create console">
+      <FIELDS>
+
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+
+        <!-- UMC activity instance -->
+        <FIELD NAME="umcid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+        <!-- Moodle user -->
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+        <!-- Snap cloud identifiers -->
+        <FIELD NAME="snapusername" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT=""/>
+        <FIELD NAME="snapproject" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT=""/>
+
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+      </FIELDS>
+
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="umc_fk" TYPE="foreign" FIELDS="umcid" REFTABLE="umc" REFFIELDS="id"/>
+        <KEY NAME="user_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+      </KEYS>
+
+      <INDEXES>
+        <!-- One record per (activity, user) -->
+        <INDEX NAME="umcuser_uix" UNIQUE="true" FIELDS="umcid,userid"/>
+      </INDEXES>
+    </TABLE>
+
+    <!-- Per-student "Modify" project pointer (Snap cloud) -->
+    <TABLE NAME="umc_usermodifyproject" COMMENT="Per-user Snap project for Modify console">
+      <FIELDS>
+
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+
+        <!-- UMC activity instance -->
+        <FIELD NAME="umcid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+        <!-- Moodle user -->
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+        <!-- Snap cloud identifiers -->
+        <FIELD NAME="snapusername" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT=""/>
+        <FIELD NAME="snapproject" TYPE="char" LENGTH="255" NOTNULL="true" DEFAULT=""/>
+
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+
+      </FIELDS>
+
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="umc_fk" TYPE="foreign" FIELDS="umcid" REFTABLE="umc" REFFIELDS="id"/>
+        <KEY NAME="user_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+      </KEYS>
+
+      <INDEXES>
+        <!-- One record per (activity, user) -->
+        <INDEX NAME="umcuser_uix" UNIQUE="true" FIELDS="umcid,userid"/>
+      </INDEXES>
+    </TABLE>
+
+  </TABLES>
+</XMLDB>
